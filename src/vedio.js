@@ -1,217 +1,8 @@
-// // InstagramLikeVideoScroll.jsx
-// import React, { useRef, useEffect, useState } from "react";
-// import "./InstagramLikeVideoScroll.css";
-// import video1 from "./vedios/1.mp4";
-// // import video2 from "./vedios/random-tabla-beats-by-newbie-370.mp4";
-// import video2 from "./vedios/2.mp4";
-// import video3 from "./vedios/3.mp4";
-// import video4 from "./vedios/4.mp4";
-// import video5 from "./vedios/5.mp4";
-// import video6 from "./vedios/6.mp4";
-
-
-// // Sample video sources
-// const videos = [video1, video2,video3,video4,video5,video6];
-
-// // Individual video card with auto-play/pause on view
-// // const VideoCard = ({ src }) => {
-// //   const videoRef = useRef(null);
-
-// //   useEffect(() => {
-// //     console.log("plaing")
-// //     const observer = new IntersectionObserver(
-// //       ([entry]) => {
-// //         if (entry.isIntersecting) {
-// //           videoRef.current.play().catch((e) => console.warn('Auto-play prevented:', e));
-// //         } else {
-// //           videoRef.current.pause();
-// //         }
-// //       },
-// //       { threshold: 0.75 }
-// //     );
-
-// //     if (videoRef.current) {
-// //       observer.observe(videoRef.current);
-// //     }
-// //     return () => observer.disconnect();
-// //   }, []);
-
-// //   return (
-// //     <div className="videoContainer">
-// //       <video
-// //         ref={videoRef}
-// //         src={src}
-// //         className="video"
-
-// //         loop
-// //         playsInline
-// //         autoPlay
-// //         preload="auto"
-// //       />
-// //     </div>
-// //   );
-// // };
-
-// // const VideoCard = ({ src, index, allowScroll, setAllowScroll }) => {
-// //   const videoRef = useRef(null);
-// //   const [isMuted, setIsMuted] = React.useState(index === 0); // Only mute first video
-
-// //   useEffect(() => {
-// //     const observer = new IntersectionObserver(
-// //       ([entry]) => {
-// //         if (entry.isIntersecting) {
-// //           videoRef.current
-// //             .play()
-// //             .catch((e) => console.warn("Auto-play prevented:", e));
-// //         } else {
-// //           videoRef.current.pause();
-// //         }
-// //       },
-// //       { threshold: 0.75 }
-// //     );
-
-// //     if (videoRef.current) {
-// //       observer.observe(videoRef.current);
-// //     }
-
-// //     return () => observer.disconnect();
-// //   }, []);
-// //   useEffect(() => {
-// //   const setVH = () => {
-// //     const vh = window.innerHeight * 0.01;
-// //     document.documentElement.style.setProperty('--vh', `${vh}px`);
-// //   };
-// //   setVH();
-// //   window.addEventListener('resize', setVH);
-// //   return () => window.removeEventListener('resize', setVH);
-// // }, []);
-
-
-// //  const handleUnmute = () => {
-// //   setIsMuted(false);
-// //   if (videoRef.current) {
-// //     videoRef.current.muted = false;
-// //     videoRef.current.play();
-// //   }
-// //   setAllowScroll(true); // ← unlocks scroll!
-// // };
-
-
-// //   return (
-// //     <div className="videoContainer">
-// //       <video
-// //         ref={videoRef}
-// //         src={src}
-// //         className="video"
-// //         muted={isMuted}
-// //         loop
-// //         playsInline
-// //         autoPlay
-// //         preload="auto"
-// //       />
-// //       {index === 0 && isMuted && (
-// //         <button className="unmuteButton" onClick={handleUnmute}>
-// //           ▶️ Tap to unmute
-// //         </button>
-// //       )}
-// //     </div>
-// //   );
-// // };
-// const VideoCard = ({ src, index, allowScroll, setAllowScroll }) => {
-//   const videoRef = useRef(null);
-//   const [isMuted, setIsMuted] = useState(index === 0);
-
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(
-//       ([entry]) => {
-//         if (entry.isIntersecting) {
-//           videoRef.current?.play().catch((e) =>
-//             console.warn("Autoplay prevented:", e)
-//           );
-//         } else {
-//           videoRef.current?.pause();
-//         }
-//       },
-//       { threshold: 0.75 }
-//     );
-
-//     if (videoRef.current) observer.observe(videoRef.current);
-//     return () => observer.disconnect();
-//   }, []);
-
-//   const handleUnmute = () => {
-//     setIsMuted(false);
-//     if (videoRef.current) {
-//       videoRef.current.muted = false;
-//       videoRef.current.play();
-//     }
-//     setAllowScroll(true); // Unlock scroll after tap
-//   };
-
-//   return (
-//     <div className="videoContainer">
-//       <video
-//         ref={videoRef}
-//         src={src}
-//         className="video"
-//         muted={isMuted}
-//         loop
-//         playsInline
-//         autoPlay
-//         preload="auto"
-//       />
-//       {index === 0 && isMuted && (
-//         <button className="unmuteButton" onClick={handleUnmute}>
-//           ▶️ Tap to unmute
-//         </button>
-//       )}
-//     </div>
-//   );
-// };
-
-
-// // Main feed component
-// // export default function InstagramLikeVideoScroll() {
-// //   return (
-// //     <div className="feedContainer">
-// //       {videos.map((src, idx) => (
-// //         <VideoCard key={idx} src={src} index={idx} />
-// //       ))}
-// //     </div>
-// //   );
-// // }
-
-// export default function InstagramLikeVideoScroll() {
-//   const [allowScroll, setAllowScroll] = useState(false);
-
-//   useEffect(() => {
-//     // Disable body scroll when allowScroll is false
-//     document.body.style.overflow = allowScroll ? 'auto' : 'hidden';
-//   }, [allowScroll]);
-
-  
-
-//   return (
-//     <div className={`feedContainer ${allowScroll ? '' : 'no-scroll'}`}>
-//       {/* Block scroll until user taps unmute */}
-//       {!allowScroll && <div className="scrollBlocker" />}
-
-//       {videos.map((src, idx) => (
-//         <VideoCard
-//           key={idx}
-//           src={src}
-//           index={idx}
-//           allowScroll={allowScroll}
-//           setAllowScroll={setAllowScroll}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
-
 
 // import React, { useEffect, useRef, useState } from "react";
 // import "./InstagramLikeVideoScroll.css";
+
+// // Import your 24 videos here (sample with 6)
 // import video1 from "./vedios/1.mp4";
 // import video2 from "./vedios/2.mp4";
 // import video3 from "./vedios/3.mp4";
@@ -219,16 +10,15 @@
 // import video5 from "./vedios/5.mp4";
 // import video6 from "./vedios/6.mp4";
 
+// const videoList = [video1, video2, video3, video4, video5, video6];
+
 // export default function InstagramReelSinglePlayer() {
-//   const videoRef = useRef(null);
+//   const videoRefs = useRef([]);
 //   const containerRef = useRef(null);
 //   const [currentIndex, setCurrentIndex] = useState(0);
 //   const [isMuted, setIsMuted] = useState(true);
 //   const [allowScroll, setAllowScroll] = useState(false);
 
-//   const videos = [video1, video2, video3, video4, video5, video6];
-
-//   // Set iPhone-safe vh unit
 //   useEffect(() => {
 //     const setVH = () => {
 //       const vh = window.innerHeight * 0.01;
@@ -239,23 +29,23 @@
 //     return () => window.removeEventListener("resize", setVH);
 //   }, []);
 
-//   // Scroll lock
 //   useEffect(() => {
 //     document.body.style.overflow = allowScroll ? "auto" : "hidden";
 //     if (!allowScroll) window.scrollTo(0, 0);
 //   }, [allowScroll]);
 
-//   // Play new video on index change
 //   useEffect(() => {
-//     if (videoRef.current) {
-//       videoRef.current.classList.add("fadeOut");
-//       setTimeout(() => {
-//         videoRef.current.src = videos[currentIndex];
-//         videoRef.current.muted = isMuted;
-//         videoRef.current.play().catch((e) => console.warn("Autoplay blocked:", e));
-//         videoRef.current.classList.remove("fadeOut");
-//       }, 200);
-//     }
+//     videoRefs.current.forEach((video, idx) => {
+//       if (video) {
+//         if (idx === currentIndex) {
+//           video.muted = isMuted;
+//           video.play().catch((e) => console.warn("Play blocked:", e));
+//         } else {
+//           video.pause();
+//           video.currentTime = 0;
+//         }
+//       }
+//     });
 //   }, [currentIndex, isMuted]);
 
 //   const handleUnmute = () => {
@@ -263,54 +53,56 @@
 //     setAllowScroll(true);
 //   };
 
-//   // Mouse scroll
-//   const handleWheel = (e) => {
-//     if (!allowScroll) return;
-//     if (e.deltaY > 50 && currentIndex < videos.length - 1) {
-//       setCurrentIndex((prev) => prev + 1);
-//     } else if (e.deltaY < -50 && currentIndex > 0) {
-//       setCurrentIndex((prev) => prev - 1);
+//   const scrollToIndex = (index) => {
+//     if (containerRef.current) {
+//       const topOffset = index * window.innerHeight;
+//       containerRef.current.scrollTo({ top: topOffset, behavior: "smooth" });
 //     }
 //   };
 
-//   // Touch scroll
-//   let touchStartY = 0;
-//   const handleTouchStart = (e) => {
-//     touchStartY = e.touches[0].clientY;
-//   };
-//   const handleTouchEnd = (e) => {
-//     const touchEndY = e.changedTouches[0].clientY;
-//     const deltaY = touchStartY - touchEndY;
-
-//     if (deltaY > 50 && currentIndex < videos.length - 1) {
-//       setCurrentIndex((prev) => prev + 1);
-//     } else if (deltaY < -50 && currentIndex > 0) {
-//       setCurrentIndex((prev) => prev - 1);
+//   const handleScroll = () => {
+//     if (!allowScroll) return;
+//     const newIndex = Math.round(
+//       containerRef.current.scrollTop / window.innerHeight
+//     );
+//     if (newIndex !== currentIndex) {
+//       setCurrentIndex(newIndex);
 //     }
 //   };
 
 //   return (
 //     <div
-//       className="reelContainer"
 //       ref={containerRef}
-//       onWheel={handleWheel}
-//       onTouchStart={handleTouchStart}
-//       onTouchEnd={handleTouchEnd}
+//       className="reelContainerScrollable"
+//       onScroll={handleScroll}
 //     >
-//       <video
-//         ref={videoRef}
-//         className="reelVideo"
-//         loop
-//         playsInline
-//         autoPlay
-//         preload="auto"
-//         muted={isMuted}
-//       />
+//       {videoList.map((src, idx) => (
+//         <div className="reelSlide" key={idx}>
+//           <video
+//             ref={(el) => (videoRefs.current[idx] = el)}
+//             className="reelVideo"
+//             src={src}
+//             loop
+//             playsInline
+//             autoPlay
+//             preload="auto"
+//             muted={isMuted}
+//           />
+//         </div>
+//       ))}
 
 //       {!allowScroll && (
-//         <button className="unmuteButton" onClick={handleUnmute}>
-//           ▶️ Tap to unmute
-//         </button>
+//         <div className="instructionDialog">
+//           <div className="instructionText">
+//             Welcome! To begin watching reels, please tap the button below to
+//             unmute and start.
+//           </div>
+//           <div>
+//             <button className="unmuteButton" onClick={handleUnmute}>
+//               OK
+//             </button>
+//           </div>
+//         </div>
 //       )}
 //     </div>
 //   );
@@ -320,28 +112,88 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./InstagramLikeVideoScroll.css";
 
-// Import all your 24+ videos
+// Import your 24 videos and background images (sample with 6)
 import video1 from "./vedios/1.mp4";
-import video2 from "./vedios/2.mp4";
-import video3 from "./vedios/3.mp4";
-import video4 from "./vedios/4.mp4";
-import video5 from "./vedios/5.mp4";
-import video6 from "./vedios/6.mp4";
-// ... import the rest (up to 24)
+import video2 from "./vedios/2e.mp4";
 
-const videoList = [
-  video1, video2, video3, video4, video5, video6,
-  // add others up to 24
+import video3 from "./vedios/2.mp4";
+import video4 from "./vedios/3.mp4";
+import video5 from "./vedios/4.mp4";
+import video6 from "./vedios/5.mp4";
+
+import video7 from "./vedios/6.mp4";
+import video8 from "./vedios/7.mp4";
+import video9 from "./vedios/8.mp4";
+import video10 from "./vedios/9.mp4";
+import video11 from "./vedios/10.mp4";
+import video12 from "./vedios/11.mp4";
+
+import video13 from "./vedios/12.mp4";
+import video14 from "./vedios/13.mp4";
+import video15 from "./vedios/14.mp4";
+import video16 from "./vedios/15.mp4";
+import video17 from "./vedios/16.mp4";
+import video18 from "./vedios/17.mp4";
+
+import video19 from "./vedios/18.mp4";
+import video20 from "./vedios/19.mp4";
+import video21 from "./vedios/20.mp4";
+import video22 from "./vedios/21.mp4";
+import video23 from "./vedios/22.mp4";
+import video24 from "./vedios/23.mp4";
+import video25 from "./vedios/24.mp4";
+import video26 from "./vedios/25.mp4";
+import video27 from "./vedios/26l.mp4";
+
+import bg1 from "./images/1.jpg";
+import bg2 from "./images/2.jpg";
+import bg3 from "./images/3.jpg";
+import bg4 from "./images/4.jpg";
+import bg5 from "./images/5.jpg";
+import bg6 from "./images/6.jpg";
+
+import bg7 from "./images/7.jpg";
+import bg8 from "./images/8.jpg";
+import bg9 from "./images/9.jpg";
+import bg10 from "./images/10.jpg";
+import bg11 from "./images/11.jpg";
+import bg12 from "./images/12.jpg";
+
+import bg13 from "./images/13.jpg";
+import bg14 from "./images/14.jpg";
+import bg15 from "./images/15.jpg";
+import bg16 from "./images/16.jpg";
+import bg17 from "./images/17.jpg";
+import bg18 from "./images/18.jpg";
+
+import bg19 from "./images/19.jpg";
+import bg20 from "./images/20.jpg";
+import bg21 from "./images/21.jpg";
+import bg22 from "./images/22.jpg";
+import bg23 from "./images/23.jpg";
+import bg24 from "./images/24.jpg";
+import bg25 from "./images/25.jpg";
+import bg26 from "./images/26.jpg";
+import bg27 from "./images/27.jpg";
+// import bg28 from "./images/abc.jpg";
+
+
+const videoList = [video1, video2, video3, video4, video5, video6,video7,video8,video9,video10,video11,
+  video12,video13,video14,video15,video16,video17,video18,video19,video20,video21,video22,video23,video24,
+  video25,video26,video27
+
+];
+const bgList = [bg1, bg2, bg3, bg4, bg5, bg6,bg7,bg8,bg9,bg10,bg11,bg12,bg13,bg14,bg15,
+  bg16,bg17,bg18,bg19,bg20,bg21,bg22,bg23,bg24,bg25,bg26,bg27
 ];
 
 export default function InstagramReelSinglePlayer() {
-  const videoRef = useRef(null);
+  const videoRefs = useRef([]);
+  const containerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [allowScroll, setAllowScroll] = useState(false);
-  const [videoCache, setVideoCache] = useState({});
 
-  // Set iPhone-safe vh unit
   useEffect(() => {
     const setVH = () => {
       const vh = window.innerHeight * 0.01;
@@ -352,102 +204,94 @@ export default function InstagramReelSinglePlayer() {
     return () => window.removeEventListener("resize", setVH);
   }, []);
 
-  // Scroll lock
   useEffect(() => {
     document.body.style.overflow = allowScroll ? "auto" : "hidden";
     if (!allowScroll) window.scrollTo(0, 0);
   }, [allowScroll]);
 
-  // 🔄 Load current/prev/next videos only
   useEffect(() => {
-    const loadVideo = (index) => {
-      return fetch(videoList[index])
-        .then(res => res.blob())
-        .then(blob => URL.createObjectURL(blob));
-    };
-
-    const preloadVideos = async () => {
-      const cache = {};
-      if (videoList[currentIndex]) {
-        cache[currentIndex] = await loadVideo(currentIndex);
+    videoRefs.current.forEach((video, idx) => {
+      if (video) {
+        if (idx === currentIndex) {
+          video.muted = isMuted;
+          video.play().catch((e) => console.warn("Play blocked:", e));
+        } else {
+          video.pause();
+          video.currentTime = 0;
+        }
       }
-      if (videoList[currentIndex + 1]) {
-        cache[currentIndex + 1] = await loadVideo(currentIndex + 1);
-      }
-      if (videoList[currentIndex - 1]) {
-        cache[currentIndex - 1] = await loadVideo(currentIndex - 1);
-      }
-      setVideoCache(cache);
-    };
-
-    preloadVideos();
-  }, [currentIndex]);
-
-  // 🔁 Play current video on change
-  useEffect(() => {
-    if (videoRef.current && videoCache[currentIndex]) {
-      videoRef.current.classList.add("fadeOut");
-
-      setTimeout(() => {
-        videoRef.current.src = videoCache[currentIndex];
-        videoRef.current.muted = isMuted;
-        videoRef.current.play().catch((e) => console.warn("Autoplay blocked:", e));
-        videoRef.current.classList.remove("fadeOut");
-      }, 200);
-    }
-  }, [currentIndex, isMuted, videoCache]);
+    });
+  }, [currentIndex, isMuted]);
 
   const handleUnmute = () => {
     setIsMuted(false);
     setAllowScroll(true);
   };
 
-  // Scroll (mouse)
-  const handleWheel = (e) => {
-    if (!allowScroll) return;
-    if (e.deltaY > 50 && currentIndex < videoList.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else if (e.deltaY < -50 && currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
+  const scrollToIndex = (index) => {
+    if (containerRef.current) {
+      const topOffset = index * window.innerHeight;
+      containerRef.current.scrollTo({ top: topOffset, behavior: "smooth" });
     }
   };
 
-  // Touch (mobile)
-  let touchStartY = 0;
-  const handleTouchStart = (e) => {
-    touchStartY = e.touches[0].clientY;
-  };
-  const handleTouchEnd = (e) => {
-    const touchEndY = e.changedTouches[0].clientY;
-    const deltaY = touchStartY - touchEndY;
-    if (deltaY > 50 && currentIndex < videoList.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else if (deltaY < -50 && currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
+  const handleScroll = () => {
+    if (!allowScroll) return;
+    const newIndex = Math.round(containerRef.current.scrollTop / window.innerHeight);
+    if (newIndex !== currentIndex) {
+      setCurrentIndex(newIndex);
     }
   };
 
   return (
     <div
-      className="reelContainer"
-      onWheel={handleWheel}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      ref={containerRef}
+      className="reelContainerScrollable"
+      onScroll={handleScroll}
     >
-      <video
-        ref={videoRef}
-        className="reelVideo"
-        loop
-        playsInline
-        autoPlay
-        preload="auto"
-        muted={isMuted}
-      />
+      {videoList.map((src, idx) => (
+        <div className="reelSlide" key={idx}>
+          <div
+            className="backgroundImage"
+            style={{
+              backgroundImage: `url(${bgList[idx]})`,
+              filter: "blur(16px)",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 0,
+              backgroundSize: "cover",
+              backgroundPosition: "center"
+            }}
+          ></div>
+          <video
+            ref={(el) => (videoRefs.current[idx] = el)}
+            className="reelVideo"
+            src={src}
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
+            muted={isMuted}
+            style={{ zIndex: 1, position: "relative" }}
+          />
+        </div>
+      ))}
 
       {!allowScroll && (
-        <button className="unmuteButton" onClick={handleUnmute}>
-          ▶️ Tap to unmute
-        </button>
+        <div className="instructionDialog">
+          <div className="instructionText">
+            Welcome! To begin watching reels, please tap the button below to unmute and start.
+          </div>
+          <div>
+            <button className="unmuteButton" onClick={handleUnmute}>
+            Ok
+          </button>
+          </div>
+          
+        </div>
       )}
     </div>
   );

@@ -1,60 +1,5 @@
 /* 
-.feedContainer {
-height: calc(var(--vh, 1vh) * 100);
-  width: 100%;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  margin: 0;
-  padding: 0;
-}
 
-.videoContainer {
-height: calc(var(--vh, 1vh) * 100);
-  width: 100%;
-  scroll-snap-align: start;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.video {
-  max-height: 100%;
-  width: auto;
-  object-fit: cover;
-}
-
-.scrollBlocker {
-  position: fixed;
-  inset: 0;
-  background: transparent;
-  z-index: 9998;
-  pointer-events: auto; 
-  touch-action: none;
-  overscroll-behavior: none;
-}
-
-.no-scroll {
-  overflow: hidden !important;
-}
-
-
-.unmuteButton {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 24px;
-  background-color: rgba(0, 0, 0, 0.75);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 9999; 
-} */
-
-
-/* 
 :root {
   --vh: 1vh;
 }
@@ -79,33 +24,137 @@ body {
 .reelVideo {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: opacity 0.3s ease;
+  object-fit: contain;
   opacity: 1;
+  transition: none;
+  animation: none;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.reelVideo.fadeOut {
-  opacity: 0;
+@keyframes fadeOutUp {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20%); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOutDown {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20%); }
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-20%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.reelVideo.fadeOutUp {
+  animation: fadeOutUp 100ms linear forwards;
+}
+
+.reelVideo.fadeInUp {
+  animation: fadeInUp 100ms linear forwards;
+}
+
+.reelVideo.fadeOutDown {
+  animation: fadeOutDown 100ms linear forwards;
+}
+
+.reelVideo.fadeInDown {
+  animation: fadeInDown 100ms linear forwards;
+}
+
+
+@keyframes fadeOutSlideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+}
+
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.videoCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: transparent;
+  pointer-events: none;
+}
+
+
+.instructionDialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 24px 32px;
+  border-radius: 16px;
+  text-align: center;
+  z-index: 9999;
+  max-width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.instructionText {
+  font-size: 16px;
+  margin-bottom: 16px;
+  line-height: 1.4;
 }
 
 .unmuteButton {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
   padding: 12px 24px;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  border: none;
+  border: 1px solid white;
   border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
   z-index: 9999;
 }
+
+
+.reelContainerScrollable {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.reelSlide {
+  scroll-snap-align: start;
+  height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+}
  */
-
-
-
 
 
  :root {
@@ -115,43 +164,86 @@ body {
 body {
   margin: 0;
   padding: 0;
-  background: black;
+  background: #232323;
   overscroll-behavior: none;
   touch-action: none;
+  height: 100dvh;
 }
 
-.reelContainer {
-  height: calc(var(--vh, 1vh) * 100);
-  width: 100vw;
-  overflow: hidden;
+.reelContainerScrollable {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.reelSlide {
+  height: 100dvh;
+  scroll-snap-align: start;
   position: relative;
-  background: black;
-  touch-action: pan-y;
+  overflow: hidden;
+  background: #232323;
 }
 
 .reelVideo {
-  width: 100%;
-  height: 100%;
-  object-fit: content;
-  transition: opacity 0.3s ease;
-  opacity: 1;
+  width: 100vw;
+  height: 100dvh;
+  object-fit: contain; /* Fill the screen while preserving aspect ratio */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* background: #232323; */
+  z-index: 0;
 }
 
+/* Optional: transition effects */
+.reelVideo.fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
 .reelVideo.fadeOut {
-  opacity: 0;
+  animation: fadeOut 0.3s ease-out forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-20%); }
+}
+
+/* Instruction Dialog */
+.instructionDialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 24px 32px;
+  border-radius: 16px;
+  text-align: center;
+  z-index: 9999;
+  max-width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.instructionText {
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 .unmuteButton {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
   padding: 12px 24px;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  border: none;
+  border: 1px solid white;
   border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
-  z-index: 9999;
 }
