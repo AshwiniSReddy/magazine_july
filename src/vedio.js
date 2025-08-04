@@ -178,8 +178,8 @@ import bg27 from "./images/27.jpg";
 // import bg28 from "./images/abc.jpg";
 
 
-const videoList = [video1, video2, video3, video4, video5, video6,video7,video8,video9,video10,video11,
-  video12,video13,video14,video15,video16,video17,video18,video19,video20,video21,video22,video23,video24,
+const videoList = ["https://livescience.s3.ap-south-1.amazonaws.com/vedios/vedios/1.mp4", video2, video3, video4, video5, video6,video7,video8,video9,"https://livescience.s3.ap-south-1.amazonaws.com/vedios/vedios/10.mp4","https://livescience.s3.ap-south-1.amazonaws.com/vedios/vedios/11.mp4",
+  "https://livescience.s3.ap-south-1.amazonaws.com/vedios/vedios/12.mp4",video13,video14,video15,video16,video17,video18,video19,video20,video21,video22,video23,video24,
   video25,video26,video27
 
 ];
