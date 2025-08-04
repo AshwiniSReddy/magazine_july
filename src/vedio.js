@@ -112,38 +112,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./InstagramLikeVideoScroll.css";
 
-// Import your 24 videos and background images (sample with 6)
-import video1 from "./vedios/1.mp4";
-import video2 from "./vedios/2e.mp4";
-
-import video3 from "./vedios/2.mp4";
-import video4 from "./vedios/3.mp4";
-import video5 from "./vedios/4.mp4";
-import video6 from "./vedios/5.mp4";
-
-import video7 from "./vedios/6.mp4";
-import video8 from "./vedios/7.mp4";
-import video9 from "./vedios/8.mp4";
-import video10 from "./vedios/9.mp4";
-import video11 from "./vedios/10.mp4";
-import video12 from "./vedios/11.mp4";
-
-import video13 from "./vedios/12.mp4";
-import video14 from "./vedios/13.mp4";
-import video15 from "./vedios/14.mp4";
-import video16 from "./vedios/15.mp4";
-import video17 from "./vedios/16.mp4";
-import video18 from "./vedios/17.mp4";
-
-import video19 from "./vedios/18.mp4";
-import video20 from "./vedios/19.mp4";
-import video21 from "./vedios/20.mp4";
-import video22 from "./vedios/21.mp4";
-import video23 from "./vedios/22.mp4";
-import video24 from "./vedios/23.mp4";
-import video25 from "./vedios/24.mp4";
-import video26 from "./vedios/25.mp4";
-import video27 from "./vedios/26l.mp4";
 
 import bg1 from "./images/1.jpg";
 import bg2 from "./images/2.jpg";
