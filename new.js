@@ -1,7 +1,8 @@
 
-let arr=[2,2,23,4,4,4,4,]
+let arr=[1,2,3,4,5,6]
 
-let set =new Set(arr);
-console.log(arr)
 
+let newarray=arr.filter((num)=>num%2==0)
+
+console.log(newarray)
 
