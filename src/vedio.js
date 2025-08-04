@@ -142,11 +142,11 @@ export default function InstagramReelSinglePlayer() {
       {!allowScroll && (
         <div className="instructionDialog">
           <div className="instructionText">
-            Welcome! To begin watching reels, please tap the button below to unmute and start.
+           Click to Explore Param Sound Magazine
           </div>
           <div>
             <button className="unmuteButton" onClick={handleUnmute}>
-            Ok
+            Explore
           </button>
           </div>
           
